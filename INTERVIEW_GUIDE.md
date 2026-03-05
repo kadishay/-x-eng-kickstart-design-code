@@ -1,23 +1,22 @@
-# Full-Stack E-Commerce Catalog Interview Guide
+# Full-Stack Wix E-Commerce Catalog Coding Interview Guide
 
 **Duration:** 60 minutes
 **Format:** Live coding with discussion
-**Stack:** Candidate's choice of framework (React/Vue/Angular + Node/Express/etc.)
+**Stack:** Candidate's choice of framework, from the available selection.
 
 ---
 
 ## Overview
 
-The candidate will build an e-commerce product catalog using a provided JSON database (20000 products). The interview progresses through phases of increasing complexity.
+The candidate will build an e-commerce product catalog using a provided JSON database. The interview progresses through phases of increasing complexity.
 
 ---
 
 ## Pre-Interview Setup
 
-1. Share `products.json` (20000 products) with the candidate
-2. Share `design.png` (UI reference design) with the candidate
-3. Ensure candidate has their preferred development environment ready
-4. Candidate should have Node.js installed
+1. Let the candidate know that they can use any framework they're comfortable with for the selection available.
+2. Verify the candidate understands the task and answer any questions they may have.
+3. Ensure they noticed the `design.png` (UI reference) and `products.json` (50,000 products).
 
 ---
 
@@ -32,28 +31,29 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 - Show at minimum: name, price, rating, image
 - Include a header with search bar placeholder
 - Include a sidebar structure for future filters
+- Page loding will be slow due to lack of pagination (will be handeled in phase 2).
 
 ### What to Look For
 
 | Area | Green Flags | Red Flags |
 |------|-------------|-----------|
 | **Project Setup** | Quick scaffolding, knows their tools | Struggles with basic setup, unclear folder structure |
-| **API Design** | Clean endpoint structure, proper HTTP methods | Inconsistent naming, GET returning 20000 items without concern |
+| **API Design** | Clean endpoint structure, proper HTTP methods | Inconsistent naming, GET returning 50000 items without concern |
 | **Data Loading** | Reads JSON correctly, handles file path | Hardcoded paths, no error handling for missing file |
 | **Frontend State** | Proper state management, loading states | No loading indicator, state mixed everywhere |
 | **Code Organization** | Separates concerns early | Everything in one file |
 
 ### Discussion Points
-- "Why did you structure the API this way?"
-- "What happens if the JSON file doesn't exist?"
-- "I notice all 20000 products are being returned and rendered - any concerns?"
+- "Why did you choose to structure the API this way?"
+- "What happens if the JSON file doesn't exist? (a databased solution, added latency)."
+- "I notice all 50,000 products are being returned and rendered, and the page is slow - how do you suggest we should fix this?"
 
 ---
 
 ## Phase 2: Pagination (15 min)
 
 ### Task
-"The page is slow with 20000 products. Implement pagination to show 20 products per page."
+"The page is slow with 50,000 products. Implement pagination to show 20 products per page."
 
 ### Requirements
 - Server-side pagination
@@ -71,7 +71,7 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 | **Edge Cases** | Handles empty pages, last page with fewer items | Crashes on invalid page numbers |
 
 ### Discussion Points
-- "What happens if someone requests page 1000?"
+- "How would the implementation look like if you had a database instead of a JSON file? (fetching from a database)"
 - "How would you implement 'infinite scroll' instead?"
 - "What's the performance difference between OFFSET pagination and cursor-based?"
 
@@ -109,6 +109,7 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 
 ## Phase 4: Polish & Discussion (15 min)
 
+
 ### Task (Optional Implementation)
 Pick ONE based on remaining time and candidate level:
 - **Sorting**: Add sort by price/name/rating
@@ -128,11 +129,18 @@ Use remaining time for deeper technical discussion:
    - "What's missing before this goes to production?"
    - "How would you test this application?"
    - "What monitoring would you add?"
+   - "Where do you see the biggest issues with the current implementation?"
+- "What would you refactor given more time?"
 
 3. **Design Decisions**
    - "Walk me through your component structure"
    - "Why did you choose [X framework/pattern]?"
    - "What would you refactor given more time?"
+
+4. **User Experience**
+   - "How would you improve the user experience?"
+   - "What features would you add?"
+   - "How would you improve the performance?"
 
 ---
 
@@ -178,7 +186,7 @@ Use remaining time for deeper technical discussion:
 ## Common Candidate Mistakes (Red Flags)
 
 1. **No loading states** - Shows blank screen while data loads
-2. **Fetching all data for pagination** - Loads 20000 items, slices on frontend
+2. **Fetching all data for pagination** - Loads 50000 items, slices on frontend
 3. **No error handling** - Crashes on network failure
 4. **Case-sensitive search** - "Headphones" doesn't find "headphones"
 5. **Memory leaks** - Not cleaning up effects/subscriptions
@@ -249,7 +257,7 @@ Expect well-structured responses:
 {
   "data": [...],
   "meta": {
-    "total": 20000,
+    "total": 50000,
     "page": 1,
     "limit": 20,
     "pages": 1000
@@ -259,7 +267,7 @@ Expect well-structured responses:
 
 ### Scaling Considerations (Discussion Points)
 Use these to gauge senior-level thinking:
-- **Database**: "How would you store 1M products?" (indexing, denormalization)
+- **Database**: "How would you store 1M products?" (indexing, denormalization, latancy, sharding)
 - **Search**: "How would you implement full-text search?" (Elasticsearch, PostgreSQL full-text)
 - **Caching**: "What would you cache and how?" (Redis, CDN, HTTP cache headers)
 - **Pagination**: "OFFSET vs cursor-based pagination tradeoffs?"
@@ -277,15 +285,7 @@ Candidates should reference `design.png` and implement:
 - Header with logo and search input
 - Left sidebar with category list and filters
 - Product grid with cards showing image, name, rating, price
-- Responsive considerations (bonus)
+- Responsive considerations (screen resize)
+- The design is a reference; result should not be pixel-perfect.
 
 ---
-
-## Post-Interview
-
-Rate each area 1-5 and provide specific examples:
-- Technical execution
-- Code quality
-- Problem-solving approach
-- Communication
-- Overall recommendation: Strong No / No / Lean No / Lean Yes / Yes / Strong Yes
