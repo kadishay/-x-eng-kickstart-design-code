@@ -144,35 +144,6 @@ Use remaining time for deeper technical discussion:
 
 ---
 
-## Evaluation Criteria
-
-### Technical Skills (40%)
-- [ ] Correct implementation of all phases
-- [ ] Proper API design (RESTful, correct status codes)
-- [ ] Clean state management
-- [ ] Error handling
-- [ ] Performance awareness
-
-### Code Quality (30%)
-- [ ] Readable, maintainable code
-- [ ] Appropriate abstractions (not over-engineered)
-- [ ] Consistent naming conventions
-- [ ] Separation of concerns
-
-### Problem Solving (20%)
-- [ ] Breaks down problems effectively
-- [ ] Asks clarifying questions
-- [ ] Handles ambiguity well
-- [ ] Recovers from mistakes gracefully
-
-### Communication (10%)
-- [ ] Explains thought process
-- [ ] Discusses tradeoffs
-- [ ] Accepts feedback well
-- [ ] Collaborative attitude
-
----
-
 ## Scoring Guide
 
 | Level | Phase 1 | Phase 2 | Phase 3 | Discussion |
@@ -196,21 +167,6 @@ Use remaining time for deeper technical discussion:
 
 ---
 
-## Hints to Give (if candidate is stuck)
-
-**Phase 1:**
-- "Have you considered using a loading state?"
-- "What does your API response structure look like?"
-
-**Phase 2:**
-- "Should the filtering happen on the client or server?"
-- "How might you combine multiple filter conditions?"
-
-**Phase 3:**
-- "What information does the frontend need to render pagination?"
-- "What should happen to the page number when filters change?"
-
----
 
 ## Sample Product Data Structure
 
@@ -234,7 +190,6 @@ Use remaining time for deeper technical discussion:
 
 **Categories:** Electronics, Sports, Home, Kitchen, Fashion, Health, Furniture, Beauty, Office, Food & Beverages
 
----
 
 ---
 

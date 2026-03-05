@@ -23,7 +23,7 @@ Each product has:
 - Create a frontend that displays products based on the design provided in (design.png)
 
 ### Phase 2: Pagination
-- Implement server-side pagination (20 items per page)
+- The page is slow with 50,000 products. Implement pagination to show 20 products at start.
 - API should return pagination metadata
 - Frontend should have a pagination control button to show more products at the end of the list
 
@@ -34,7 +34,7 @@ Each product has:
 - Pagination should work with filters
 
 ### Phase 4: Polish & Discussion (15 min)
-
+- Improve the code architecture and apply best practices.
 
 ## Design Reference
 
