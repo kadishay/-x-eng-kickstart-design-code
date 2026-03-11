@@ -1,4 +1,4 @@
-# Full-Stack Interview: Wix E-Commerce Catalog
+# Full-Stack Interview: Wix E-Commerce
 
 ## Overview
 

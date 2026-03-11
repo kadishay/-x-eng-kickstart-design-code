@@ -1,4 +1,4 @@
-# Full-Stack Wix E-Commerce Catalog Coding Interview Guide
+# Full-Stack Wix E-Commerce Interview Guide
 
 **Duration:** 60 minutes
 **Format:** Live coding with discussion
