@@ -1,13 +1,13 @@
-# Full-Stack Interview: E-Commerce Catalog
+# Full-Stack Interview: Wix E-Commerce Catalog
 
 ## Overview
 
-You'll build a product catalog application using the provided JSON database. Use any framework you're comfortable with (React, Vue, Angular, etc. for frontend; Node, Express, etc. for backend).
+You'll build a product catalog application using the provided JSON database. Use any framework you're comfortable with for the selection available.
 
 ## Setup
 
 You're provided with:
-- `products.json` containing 20000 e-commerce products
+- `products.json` containing 50,000 e-commerce products
 - `design.png` - reference design for the UI (your implementation should follow this layout)
 
 Each product has:
@@ -20,19 +20,26 @@ Each product has:
 
 ### Phase 1: Basic Display
 - Create a backend API that serves product data
-- Create a frontend that displays products (grid/list)
-- Show: name, price, category, image (at minimum)
+- Create a frontend that displays products based on the design provided in (design.png)
 
 ### Phase 2: Pagination
-- Implement server-side pagination (20 items per page)
+- The page is slow with 50,000 products. Implement pagination to show 20 products at start.
 - API should return pagination metadata
 - Frontend should have a pagination control button to show more products at the end of the list
 
-### Phase 3: Filtering & Search
-- Add category filter
-- Add text search (by product name)
-- Filters should work together
-- Pagination should work with filters
+### Phase 3: Cart Checkout
+Based on your design from the previous phase, implement cart functionality:
+- `POST /api/cart/items` - Add an item to the cart
+- `GET /api/cart` - Get all items in the cart with total price
+- `POST /api/cart/checkout` - Complete the purchase and clear the cart
+
+Notes:
+- Store cart data in-memory on the server (or a JSON file)
+- A user has one active cart; the cart clears after checkout
+- No need to manage inventory - assume unlimited stock
+
+### Phase 4: Polish & Discussion (15 min)
+- Improve the code architecture and apply best practices.
 
 ## Design Reference
 
@@ -47,19 +54,9 @@ You don't need to match it pixel-perfect, but follow the general layout and stru
 ## Technical Guidelines
 
 ### API Design
-- Use RESTful conventions with proper HTTP methods:
-  - `GET` for retrieving data
-  - `POST` for creating resources
-  - `PUT/PATCH` for updates
-  - `DELETE` for removals
+- Use RESTful conventions with proper HTTP methods
 - Return appropriate HTTP status codes (200, 400, 404, 500)
 - Use consistent response structure
-
-### Scaling Considerations
-- Think about how your solution would handle 50,000+ products
-- Consider database indexing for filtered fields
-- Be mindful of payload sizes and response times
-- Consider caching strategies where appropriate
 
 ### Code Quality
 - Separate concerns (routes, controllers, services)
