@@ -33,6 +33,14 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 - Include a sidebar structure for future filters
 - Page loding will be slow due to lack of pagination (will be handeled in phase 2).
 
+### Design Implementation
+Candidates should reference `design.png` and implement:
+- Header with logo and search input
+- Left sidebar with category list and filters
+- Product grid with cards showing image, name, rating, price
+- Responsive considerations (screen resize)
+- The design is a reference; result should not be pixel-perfect. 
+
 ### What to Look For
 
 | Area | Green Flags | Red Flags |
@@ -68,6 +76,7 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 | **API Design** | Proper query params, metadata in response | No total count, no page metadata |
 | **Implementation** | Correct slice logic, 1-indexed vs 0-indexed awareness | Off-by-one errors, wrong page results |
 | **Response Structure** | `{ data: [], meta: { total, page, limit, pages }}` | Flat array with no metadata |
+| **Cient Side Pagination** | Server pagination | Flat array with no metadata | Loads 50000 items, slices on frontend |
 | **Edge Cases** | Handles empty pages, last page with fewer items | Crashes on invalid page numbers |
 
 ### Discussion Points
@@ -132,14 +141,16 @@ Use remaining time for deeper technical discussion:
 1. **Scaling Questions**
    - "How would you handle 1 million products?"
    - "What if multiple users are updating inventory simultaneously?"
-   - "How would you add full-text search?"
+   - "How would you implement full-text search?" (Elasticsearch, PostgreSQL full-text)
+   - "How would you store 1M products?" (indexing, denormalization, latancy, sharding)
+   - "What would you cache and how?" (Redis, CDN, HTTP cache headers)
 
 2. **Production Readiness**
    - "What's missing before this goes to production?"
    - "How would you test this application?"
    - "What monitoring would you add?"
    - "Where do you see the biggest issues with the current implementation?"
-- "What would you refactor given more time?"
+   - "What would you refactor given more time?"
 
 3. **Design Decisions**
    - "Walk me through your component structure"
@@ -153,28 +164,7 @@ Use remaining time for deeper technical discussion:
 
 ---
 
-## Scoring Guide
-
-| Level | Phase 1 | Phase 2 | Phase 3 | Discussion |
-|-------|---------|---------|---------|------------|
-| **Junior** | Completes with guidance | Partial completion | Started | Basic awareness |
-| **Mid** | Completes quickly | Completes | Completes with minor issues | Good tradeoff discussion |
-| **Senior** | Excellent structure | Excellent + URL state | Perfect + edge cases | Deep architecture insights |
-
----
-
-## Common Candidate Mistakes (Red Flags)
-
-1. **No loading states** - Shows blank screen while data loads
-2. **Fetching all data for pagination** - Loads 50000 items, slices on frontend
-3. **No error handling** - Crashes on network failure
-4. **Duplicating cart items** - Adding same product creates duplicate instead of incrementing quantity
-5. **Memory leaks** - Not cleaning up effects/subscriptions
-6. **Cart not cleared after checkout** - Checkout succeeds but cart still has items
-7. **No empty cart validation** - Allows checkout with empty cart
-8. **Hardcoded values** - Magic numbers everywhere
-
-## Parameters to evaluate AI usgae:
+## Parameters to evaluate AI usage:
 1. **Ownership of the Solution**: can reason about logic, implementation decisions, complexity, and trade-offs.
 Evaluate: by asking questions about implementation details.
 Red flag: can’t explain.
@@ -192,82 +182,5 @@ Evaluate: gets to the advanced phases of the exercise.
 Red flag: stuck in early phases.
 
 **Bottom line KPI: Positive AI usage — boosted, but in control.**
-
----
-
-## Sample Product Data Structure
-
-```json
-{
-  "id": 1,
-  "name": "Premium Wireless Headphones",
-  "description": "High-quality audio with deep bass...",
-  "price": 149.99,
-  "category": "Electronics",
-  "subcategory": "Audio",
-  "brand": "SoundMax",
-  "stock": 45,
-  "rating": 4.5,
-  "reviewCount": 234,
-  "image": "https://picsum.photos/seed/prod1/400/400",
-  "tags": ["wireless", "bluetooth", "noise-cancelling"],
-  "createdAt": "2024-01-15"
-}
-```
-
-**Categories:** Electronics, Sports, Home, Kitchen, Fashion, Health, Furniture, Beauty, Office, Food & Beverages
-
-
----
-
-## Technical Expectations
-
-### HTTP Methods & REST Conventions
-Candidates should demonstrate understanding of:
-- `GET` for retrieving resources (products, categories)
-- `POST` for creating resources (if applicable)
-- `PUT/PATCH` for updates, `DELETE` for removals
-- Proper HTTP status codes:
-  - `200` - Success
-  - `400` - Bad request (invalid query params)
-  - `404` - Resource not found
-  - `500` - Server error
-
-### API Response Structure
-Expect well-structured responses:
-```json
-{
-  "data": [...],
-  "meta": {
-    "total": 50000,
-    "page": 1,
-    "limit": 20,
-    "pages": 1000
-  }
-}
-```
-
-### Scaling Considerations (Discussion Points)
-Use these to gauge senior-level thinking:
-- **Database**: "How would you store 1M products?" (indexing, denormalization, latancy, sharding)
-- **Search**: "How would you implement full-text search?" (Elasticsearch, PostgreSQL full-text)
-- **Caching**: "What would you cache and how?" (Redis, CDN, HTTP cache headers)
-- **Pagination**: "OFFSET vs cursor-based pagination tradeoffs?"
-- **Filtering**: "How would you handle complex filter combinations efficiently?"
-
-### Code Architecture Expectations
-| Level | Expected Structure |
-|-------|-------------------|
-| **Junior** | Working code, may be in few files |
-| **Mid** | Separated routes/controllers, basic error handling |
-| **Senior** | Service layer, middleware, validation, proper typing |
-
-### Design Implementation
-Candidates should reference `design.png` and implement:
-- Header with logo and search input
-- Left sidebar with category list and filters
-- Product grid with cards showing image, name, rating, price
-- Responsive considerations (screen resize)
-- The design is a reference; result should not be pixel-perfect.
 
 ---
