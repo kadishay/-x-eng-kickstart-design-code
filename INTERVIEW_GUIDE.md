@@ -77,33 +77,42 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 
 ---
 
-## Phase 3: Filtering & Search (15 min)
+## Phase 3: Cart Checkout (15 min)
 
 ### Task
-"Add filtering by category and a search feature that searches by product name."
+"Based on your design from the previous phase, implement cart functionality with these APIs:
+- `POST /api/cart/items` - Add an item to the cart
+- `GET /api/cart` - Get all items in the cart with total price
+- `POST /api/cart/checkout` - Complete the purchase and clear the cart"
 
 ### Requirements
-- Category filter (dropdown or similar)
-- Text search that filters by product name
-- Filters should work together (AND logic)
-- Pagination should work with filters
-- Can be client-side or server-side (note which they choose)
+- Store cart data in-memory on the server (object/Map) or a JSON file
+- Adding an existing item should increment quantity (not duplicate)
+- Cart should include items with quantities and calculated total
+- Checkout clears the cart and returns an order confirmation
+- No inventory management needed - assume unlimited stock
+
+### Interviewer Notes
+- For simplicity, assume a single user (no userId needed unless they ask)
+- If they ask about persistence: "In-memory is fine for this exercise, but how would you handle server restarts?" (good discussion point)
+- Cart structure suggestion: `{ items: [{ productId, quantity, price, name }], total }`
 
 ### What to Look For
 
 | Area | Green Flags | Red Flags |
 |------|-------------|-----------|
-| **Filter Location** | Thoughtful choice (client vs server), can explain tradeoffs | No awareness that this is a decision |
-| **Search Implementation** | Debounced input, case-insensitive | Fires on every keystroke, case-sensitive |
-| **State Management** | Clean filter state, URL params consideration | Filters don't compose, messy state |
-| **UX Considerations** | Clear active filters, reset option | Unclear which filters are active |
-| **Performance** | Memoization if client-side, indexed if server-side | Re-renders entire list on filter change |
-| **Filter Integration** | Filters + pagination work together, resets to page 1 on filter | Pagination breaks when filtering |
+| **Data Structure** | Clean cart object, items with quantities, computed total | Flat array of items, no quantity handling |
+| **Add to Cart** | Finds existing item and increments qty, or adds new | Duplicates items, doesn't check if exists |
+| **Price Calculation** | Calculates total from items × quantities, handles decimals | Hardcoded total, floating point errors |
+| **Checkout Flow** | Validates cart not empty, clears cart, returns confirmation | No validation, cart not cleared |
+| **API Design** | RESTful endpoints, proper HTTP methods and status codes | Inconsistent routes, wrong methods (GET for mutations) |
+| **Error Handling** | Handles invalid productId, empty cart checkout | Crashes on edge cases |
 
 ### Discussion Points
-- "You implemented filters on the [client/server] - what are the tradeoffs?"
-- "How would this scale to 50,000 products?"
-- "What if we wanted to deep-link to a filtered view?"
+- "How would you persist the cart if the server restarts?"
+- "How would you handle multiple users with separate carts?"
+- "What if a product's price changes while it's in someone's cart?"
+- "How would this scale with a real database? What would you index?"
 
 ---
 
@@ -114,7 +123,7 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 Pick ONE based on remaining time and candidate level:
 - **Sorting**: Add sort by price/name/rating
 - **Product Detail**: Click to view product details
-- **Cart Preview**: Add to cart functionality
+- **Filtering & Search**: Add category filter and text search
 - **Error Handling**: Proper error states throughout
 
 ### Architecture Discussion
@@ -159,10 +168,10 @@ Use remaining time for deeper technical discussion:
 1. **No loading states** - Shows blank screen while data loads
 2. **Fetching all data for pagination** - Loads 50000 items, slices on frontend
 3. **No error handling** - Crashes on network failure
-4. **Case-sensitive search** - "Headphones" doesn't find "headphones"
+4. **Duplicating cart items** - Adding same product creates duplicate instead of incrementing quantity
 5. **Memory leaks** - Not cleaning up effects/subscriptions
-6. **Filter state lost** - Changing page resets filters
-7. **No input debouncing** - API called on every keystroke
+6. **Cart not cleared after checkout** - Checkout succeeds but cart still has items
+7. **No empty cart validation** - Allows checkout with empty cart
 8. **Hardcoded values** - Magic numbers everywhere
 
 ## Parameters to evaluate AI usgae:

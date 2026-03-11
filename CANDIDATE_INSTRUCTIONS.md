@@ -27,11 +27,16 @@ Each product has:
 - API should return pagination metadata
 - Frontend should have a pagination control button to show more products at the end of the list
 
-### Phase 3: Filtering & Search
-- Add category filter
-- Add text search (by product name)
-- Filters should work together
-- Pagination should work with filters
+### Phase 3: Cart Checkout
+Based on your design from the previous phase, implement cart functionality:
+- `POST /api/cart/items` - Add an item to the cart
+- `GET /api/cart` - Get all items in the cart with total price
+- `POST /api/cart/checkout` - Complete the purchase and clear the cart
+
+Notes:
+- Store cart data in-memory on the server (or a JSON file)
+- A user has one active cart; the cart clears after checkout
+- No need to manage inventory - assume unlimited stock
 
 ### Phase 4: Polish & Discussion (15 min)
 - Improve the code architecture and apply best practices.
