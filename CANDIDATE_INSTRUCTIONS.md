@@ -38,7 +38,7 @@ Notes:
 - A user has one active cart; the cart clears after checkout
 - No need to manage inventory - assume unlimited stock
 
-### Phase 4: Polish & Discussion (15 min)
+### Phase 4: Polish & Discussion
 - Improve the code architecture and apply best practices.
 
 ## Design Reference

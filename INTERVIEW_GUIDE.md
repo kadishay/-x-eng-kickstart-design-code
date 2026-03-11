@@ -14,13 +14,13 @@ The candidate will build an e-commerce product catalog using a provided JSON dat
 
 ## Pre-Interview Setup
 
-1. Let the candidate know that they can use any framework they're comfortable with for the selection available.
+1. Let the candidate know that they can use any framework they're comfortable with from the selection available within the online coding platform.
 2. Verify the candidate understands the task and answer any questions they may have.
 3. Ensure they noticed the `design.png` (UI reference) and `products.json` (50,000 products).
 
 ---
 
-## Phase 1: Basic Setup & Data Display (15 min)
+## Phase 1: Basic Setup & Data Display (15-20 min)
 
 ### Task
 "Build a simple backend API that serves product data from the JSON file, and a frontend that displays the products. Use the provided design.png as a reference for the UI layout."
@@ -58,7 +58,7 @@ Candidates should reference `design.png` and implement:
 
 ---
 
-## Phase 2: Pagination (15 min)
+## Phase 2: Pagination (10-20 min)
 
 ### Task
 "The page is slow with 50,000 products. Implement pagination to show 20 products per page."
@@ -86,7 +86,7 @@ Candidates should reference `design.png` and implement:
 
 ---
 
-## Phase 3: Cart Checkout (15 min)
+## Phase 3: Cart Checkout (15-20 min)
 
 ### Task
 "Based on your design from the previous phase, implement cart functionality with these APIs:
@@ -125,7 +125,7 @@ Candidates should reference `design.png` and implement:
 
 ---
 
-## Phase 4: Polish & Discussion (15 min)
+## Phase 4: Polish & Discussion (15 min - optional)
 
 
 ### Task (Optional Implementation)
